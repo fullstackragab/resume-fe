@@ -1,15 +1,12 @@
-.wrapper {
-  display: grid;
-  width: 100%;
-  grid-template-rows: calc(100vh - 100px) 80px;
-}
-
 .prompt {
-  width: 96%;
+  width: 100%;
+  height: 100px;
   margin: auto;
   display: flex;
   gap: 6px;
+  padding: 30px;
   align-items: center;
+  padding-right: 50px;
 }
 
 .prompt .upload {
@@ -25,7 +22,46 @@
   border: 1px solid gray;
 }
 
+.header {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: rgb(50, 50, 50);
+  text-align: center;
+  padding: 20px;
+  height: 60px;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  max-width: 600px;
+  max-height: 100vh;
+  overflow: hidden;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 60px calc(100vh - 160px) 100px;
+  gap: 0px;
+  box-sizing: border-box;
+}
+
 .answer {
+  height: calc(100vh - 160px);
   overflow-y: auto;
-  padding: 10px 20px;
+  padding: 20px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 10px;
+  margin: 10px;
+  padding-top: 10px;
+}
+
+.loading {
+  height: calc(100vh - 160px);
+  padding: 20px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 10px;
+  margin: 10px;
+  width: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

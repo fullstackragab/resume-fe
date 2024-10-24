@@ -1,12 +1,17 @@
-<div class="wrapper">
-  <markdown class="answer" [data]="answer"></markdown>
+<div class="container">
+  <header class="header">Enhance your CV</header>
+  @if (loading) {
+  <p-progressSpinner class="loading" ariaLabel="loading" />} @else {
+  <markdown class="answer" [data]="answer"></markdown>}
   <div class="prompt">
-    <input
+    <p-fileUpload
+      mode="basic"
+      chooseLabel="Choose"
+      chooseIcon="pi pi-upload"
       class="upload"
-      type="file"
-      #input
-      (change)="onFileSelected($event)"
+      (onSelect)="onSelectFile($event, fileUpload)"
+      #fileUpload
     />
-    <button (click)="onSend()">Send</button>
+    <p-button (click)="onSend()">Send</p-button>
   </div>
 </div>

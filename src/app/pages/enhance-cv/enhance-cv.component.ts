@@ -1,38 +1,53 @@
-import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { GeminiService } from '../../services/gemini.service';
 import { MarkdownComponent } from 'ngx-markdown';
 import { first } from 'rxjs';
+import { ButtonModule } from 'primeng/button';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-enhance-cv',
   standalone: true,
-  imports: [MarkdownComponent],
+  imports: [
+    MarkdownComponent,
+    ButtonModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
+  ],
   templateUrl: './enhance-cv.component.html',
   styleUrl: './enhance-cv.component.css',
 })
 export class EnhanceCvComponent {
-  @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   selectedFile: File | null = null;
-
+  fileUploadCtrl: any;
   answer: any;
+  loading = false;
+
   constructor(private geminiService: GeminiService) {}
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      this.selectedFile = input.files[0];
-    }
+  onSelectFile(e: any, fileUpload: any) {
+    this.selectedFile = e.files[0];
+    this.fileUploadCtrl = fileUpload;
   }
 
   onSend() {
-    if (this.selectedFile)
+    if (this.selectedFile) {
+      this.loading = true;
       this.geminiService
         .enhanceCV(this.selectedFile)
         .pipe(first())
-        .subscribe((answer: any) => {
-          this.selectedFile = null;
-          this.input.nativeElement.value = '';
-          this.answer = answer;
+        .subscribe({
+          next: (answer: any) => {
+            this.selectedFile = null;
+            this.fileUploadCtrl.clear();
+            this.answer = answer;
+            this.loading = false;
+          },
+          error: (e) => {
+            this.loading = false;
+          },
         });
+    }
   }
 }
