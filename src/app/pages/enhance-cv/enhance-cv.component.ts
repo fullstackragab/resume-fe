@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { GeminiService } from '../../services/gemini.service';
 import { MarkdownComponent } from 'ngx-markdown';
-import { first } from 'rxjs';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { first } from 'rxjs';
+import { GeminiService } from '../../services/gemini.service';
 
 @Component({
   selector: 'app-enhance-cv',
