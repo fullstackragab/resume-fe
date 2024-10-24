@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <markdown class="answer" [data]="answer"></markdown>
+  <div class="prompt">
+    <input
+      class="upload"
+      type="file"
+      #input
+      (change)="onFileSelected($event)"
+    />
+    <button (click)="onSend()">Send</button>
+  </div>
+</div>
